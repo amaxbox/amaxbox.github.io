@@ -11,7 +11,7 @@ Framer.Info =
 
 # screenConst = 3
 buttons=[]
-i = 1
+i = 0
 cross = """
 <svg width="112px" height="112px" viewBox="151 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
