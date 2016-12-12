@@ -104,7 +104,7 @@ tictacDB.get "/index", (k) ->
 				print matrix
 				print k
 
-tictacDB.onChange "/index", (i_r2) ->
+tictacDB.onChange "/index", (k) ->
 	tictacDB.get "/matrix", (matrix_receive) ->
 		for j in [0...matrix.length]
 			if matrix_receive[j] == "0" 
