@@ -8,7 +8,6 @@ Framer.Info =
 	twitter: ""
 	description: ""
 
-
 # screenConst = 3
 buttons=[]
 i = 0
@@ -50,6 +49,7 @@ tictacDB = new Firebase
 board = new Layer
 	x: Align.center
 	y: Align.center
+	rotationX: 45
 	width: 114*3-2
 	height: 114*3-2
 	backgroundColor: "rgba(255,255,255,0.10)"
@@ -74,16 +74,16 @@ tictacDB.put("/index",i)
 
 tictacDB.get "/matrix", (matrix_receive) ->
 	for j in [0...matrix.length]
-		if matrix_receive[j] == "0" 
+		if matrix_receive[j] == "0"
 			buttons[j].html = circle
-		else if matrix_receive[j] == "1" 
+		else if matrix_receive[j] == "1"
 			buttons[j].html = cross
 
 # tictacDB.get "/matrix", (matrix) ->
 # 	for j in [0...matrix.length]
-# 		if matrix[j] == "0" 
+# 		if matrix[j] == "0"
 # 			buttons[j].html = circle
-# 		else if matrix[j] == "1" 
+# 		else if matrix[j] == "1"
 # 			buttons[j].html = cross
 
 tictacDB.get "/index", (k) ->
@@ -92,7 +92,7 @@ tictacDB.get "/index", (k) ->
 			actual_layer = this.html
 			actual_layer_id = this.id-3
 			if actual_layer == """ """
-				if (k % 2) == 0 
+				if (k % 2) == 0
 					matrix[actual_layer_id] = "1"
 					tictacDB.put("/matrix",matrix)
 					k++
@@ -107,8 +107,7 @@ tictacDB.get "/index", (k) ->
 tictacDB.onChange "/index", (k) ->
 	tictacDB.get "/matrix", (matrix_receive) ->
 		for j in [0...matrix.length]
-			if matrix_receive[j] == "0" 
+			if matrix_receive[j] == "0"
 				buttons[j].html = circle
-			else if matrix_receive[j] == "1" 
+			else if matrix_receive[j] == "1"
 				buttons[j].html = cross
-
