@@ -86,11 +86,11 @@ tictacDB.get "/matrix", (matrix) ->
 		else if matrix[j] == "1" 
 			buttons[j].html = cross
 
-for layer in buttons
-	layer.onClick ->
-		actual_layer = this.html
-		actual_layer_id = this.id-3
-		tictacDB.get "/index", (k) ->
+tictacDB.get "/index", (k) ->
+	for layer in buttons
+		layer.onClick ->
+			actual_layer = this.html
+			actual_layer_id = this.id-3
 			if actual_layer == """ """
 				if (k % 2) == 0 
 					matrix[actual_layer_id] = "1"
