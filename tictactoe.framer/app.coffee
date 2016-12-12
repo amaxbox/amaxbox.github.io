@@ -66,19 +66,24 @@ for indexY in [0..2]
 			parent: board
 			html: """ """
 		buttons.push(cell)
-# 		matrix.push(" ")
+		matrix.push(" ")
 
 
 tictacDB.put("/matrix",matrix)
-
-i = 0
 tictacDB.put("/index",i)
 
-tictacDB.get "/matrix", (matrix_receive) ->
+# tictacDB.get "/matrix", (matrix_receive) ->
+# 	for j in [0...matrix.length]
+# 		if matrix_receive[j] == "0" 
+# 			buttons[j].html = circle
+# 		else if matrix_receive[j] == "1" 
+# 			buttons[j].html = cross
+
+tictacDB.get "/matrix", (matrix) ->
 	for j in [0...matrix.length]
-		if matrix_receive[j] == "0" 
+		if matrix[j] == "0" 
 			buttons[j].html = circle
-		else if matrix_receive[j] == "1" 
+		else if matrix[j] == "1" 
 			buttons[j].html = cross
 
 for layer in buttons
@@ -96,12 +101,13 @@ for layer in buttons
 					tictacDB.put("/matrix",matrix)
 					k++
 				tictacDB.put("/index",k)
+				print matrix
 
 tictacDB.onChange "/index", (i_r2) ->
-	tictacDB.get "/matrix", (matrix_receive) ->
+	tictacDB.get "/matrix", (matrix) ->
 		for j in [0...matrix.length]
-			if matrix_receive[j] == "0" 
+			if matrix[j] == "0" 
 				buttons[j].html = circle
-			else if matrix_receive[j] == "1" 
+			else if matrix[j] == "1" 
 				buttons[j].html = cross
 
