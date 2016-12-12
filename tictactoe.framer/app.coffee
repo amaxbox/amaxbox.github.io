@@ -70,7 +70,7 @@ for indexY in [0..2]
 
 
 # tictacDB.put("/matrix",matrix)
-tictacDB.put("/index",i)
+# tictacDB.put("/index",i)
 
 tictacDB.get "/matrix", (matrix_receive) ->
 	for j in [0...matrix.length]
