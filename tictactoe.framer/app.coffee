@@ -102,6 +102,7 @@ for layer in buttons
 					k++
 				tictacDB.put("/index",k)
 				print matrix
+				print k
 
 tictacDB.onChange "/index", (i_r2) ->
 	tictacDB.get "/matrix", (matrix) ->
