@@ -33,7 +33,7 @@ tictacDB = new Firebase({
 board = new Layer({
   x: Align.center,
   y: Align.center,
-  rotationX: 45,
+  rotationX: 30,
   width: 114 * 3 - 2,
   height: 114 * 3 - 2,
   backgroundColor: "rgba(255,255,255,0.10)"
