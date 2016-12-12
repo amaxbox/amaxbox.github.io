@@ -72,19 +72,19 @@ for indexY in [0..2]
 tictacDB.put("/matrix",matrix)
 tictacDB.put("/index",i)
 
-# tictacDB.get "/matrix", (matrix_receive) ->
-# 	for j in [0...matrix.length]
-# 		if matrix_receive[j] == "0" 
-# 			buttons[j].html = circle
-# 		else if matrix_receive[j] == "1" 
-# 			buttons[j].html = cross
-
-tictacDB.get "/matrix", (matrix) ->
+tictacDB.get "/matrix", (matrix_receive) ->
 	for j in [0...matrix.length]
-		if matrix[j] == "0" 
+		if matrix_receive[j] == "0" 
 			buttons[j].html = circle
-		else if matrix[j] == "1" 
+		else if matrix_receive[j] == "1" 
 			buttons[j].html = cross
+
+# tictacDB.get "/matrix", (matrix) ->
+# 	for j in [0...matrix.length]
+# 		if matrix[j] == "0" 
+# 			buttons[j].html = circle
+# 		else if matrix[j] == "1" 
+# 			buttons[j].html = cross
 
 tictacDB.get "/index", (k) ->
 	for layer in buttons
@@ -105,10 +105,10 @@ tictacDB.get "/index", (k) ->
 				print k
 
 tictacDB.onChange "/index", (i_r2) ->
-	tictacDB.get "/matrix", (matrix) ->
+	tictacDB.get "/matrix", (matrix_receive) ->
 		for j in [0...matrix.length]
-			if matrix[j] == "0" 
+			if matrix_receive[j] == "0" 
 				buttons[j].html = circle
-			else if matrix[j] == "1" 
+			else if matrix_receive[j] == "1" 
 				buttons[j].html = cross
 
