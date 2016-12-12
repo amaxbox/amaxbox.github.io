@@ -69,7 +69,7 @@ for indexY in [0..2]
 		matrix.push(" ")
 
 
-tictacDB.put("/matrix",matrix)
+# tictacDB.put("/matrix",matrix)
 tictacDB.put("/index",i)
 
 tictacDB.get "/matrix", (matrix_receive) ->
