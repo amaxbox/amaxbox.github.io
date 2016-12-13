@@ -47,7 +47,7 @@ tictacDB = new Firebase
 board = new Layer
 	x: Align.center
 	y: Align.center
-	rotationX: 30
+	rotationX: 45
 	width: 114*3-2
 	height: 114*3-2
 	backgroundColor: "rgba(255,255,255,0.10)"
@@ -64,7 +64,6 @@ for indexY in [0..2]
 			html: """ """
 		buttons.push(cell)
 		matrix.push(" ")
-
 
 tictacDB.put("/matrix",matrix)
 tictacDB.put("/index",i)
