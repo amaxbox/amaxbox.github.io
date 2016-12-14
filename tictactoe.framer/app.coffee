@@ -38,6 +38,9 @@ bg = new BackgroundLayer
 
 matrix = []
 matrix_receive = []
+users = []
+users_receive = []
+
 {Firebase} = require 'firebase'
 
 tictacDB = new Firebase
@@ -65,8 +68,37 @@ for indexY in [0..2]
 		buttons.push(cell)
 		matrix.push(" ")
 
+new_user = Utils.round(Utils.randomNumber(0, 100),0)
+print new_user, users
+
+tictacDB.get "/users", (users_receive) ->
+	print "User Receive:", users_receive
+
+users.push(users_receive)
+users.push(new_user)
+
+print "Users:", users
+
+
+
+# tictacDB.get "/users", (users_receive) ->
+# 	print users_receive
+#
+# users.push(users_receive)
+# print users
+# new_user = Utils.round(Utils.randomNumber(0, 100),0)
+# print new_user
+# users.push(new_user)
+# print users
+
+# tictacDB.put("/users",users)
+
 tictacDB.put("/matrix",matrix)
 tictacDB.put("/index",i)
+
+# tictacDB.get "/users", (users_receive) ->
+# 	print users_receive
+
 
 tictacDB.get "/matrix", (matrix_receive) ->
 	for j in [0...matrix.length]
