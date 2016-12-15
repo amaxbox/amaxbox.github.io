@@ -32,6 +32,10 @@ circle = """
     </g>
 </svg>
 """
+if Utils.isDesktop
+	scaleFactor = 1
+else
+	scaleFactor = 3
 
 bg = new BackgroundLayer
     backgroundColor: "#2F4858"
@@ -46,16 +50,16 @@ startNewGame = ->
 	board = new Layer
 		x: Align.center
 		y: Align.center
-		width: 114*3-2
-		height: 114*3-2
+		width: (114*3-2)*scaleFactor
+		height: (114*3-2)*scaleFactor
 		backgroundColor: "rgba(255,255,255,0.10)"
 
 	for indexY in [0..2]
 		for indexX in [0..2]
 			cell = new Layer
-				x: indexX*114
-				y: indexY*114
-				size: 112
+				x: indexX*114*scaleFactor
+				y: indexY*114*scaleFactor
+				size: 112*scaleFactor
 				backgroundColor: "#2F4858"
 				opacity: 1
 				parent: board
