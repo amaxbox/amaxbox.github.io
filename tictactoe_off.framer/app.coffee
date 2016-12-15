@@ -32,9 +32,9 @@ circle = """
     </g>
 </svg>
 """
-if Utils.isDesktop
+if Utils.isDesktop()
 	scaleFactor = 1
-else
+else 
 	scaleFactor = 3
 print scaleFactor
 bg = new BackgroundLayer
