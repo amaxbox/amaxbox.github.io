@@ -36,7 +36,7 @@ if Utils.isDesktop()
 	scaleFactor = 1
 else 
 	scaleFactor = 3
-print scaleFactor
+
 bg = new BackgroundLayer
     backgroundColor: "#2F4858"
 startButton = new Layer
