@@ -8,9 +8,8 @@ Framer.Info =
 	twitter: ""
 	description: ""
 
-# screenConst = 3
-buttons=[]
-i = 0
+
+
 cross = """
 <svg width="112px" height="112px" viewBox="151 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
@@ -33,93 +32,71 @@ circle = """
     </g>
 </svg>
 """
+
 bg = new BackgroundLayer
     backgroundColor: "#2F4858"
-
-matrix = []
-matrix_receive = []
-users = []
-users_receive = []
+startButton = new Layer
 
 
-board = new Layer
-	x: Align.center
-	y: Align.center
-	rotationX: 45
-	width: 114*3-2
-	height: 114*3-2
-	backgroundColor: "rgba(255,255,255,0.10)"
+startNewGame = ->
+	buttons = []
+	i = 1
+	m=0
+	matrix = []
+	board = new Layer
+		x: Align.center
+		y: Align.center
+		width: 114*3-2
+		height: 114*3-2
+		backgroundColor: "rgba(255,255,255,0.10)"
 
-for indexY in [0..2]
-	for indexX in [0..2]
-		cell = new Layer
-			x: indexX*114
-			y: indexY*114
-			size: 112
-			backgroundColor: "#2F4858"
-			opacity: 1
-			parent: board
-			html: """ """
-		buttons.push(cell)
-		matrix.push("0")
+	for indexY in [0..2]
+		for indexX in [0..2]
+			cell = new Layer
+				x: indexX*114
+				y: indexY*114
+				size: 112
+				backgroundColor: "#2F4858"
+				opacity: 1
+				parent: board
+				name: m
+				html: """ """
+			buttons.push(cell)
+			matrix.push(" ")
+			m++
 
-
-
-# tictacDB.get "/users", (users_receive) ->
-# 	print users_receive
-#
-# users.push(users_receive)
-# print users
-# new_user = Utils.round(Utils.randomNumber(0, 100),0)
-# print new_user
-# users.push(new_user)
-# print users
-
-# tictacDB.put("/users",users)
-
-tictacDB.put("/matrix",matrix)
-tictacDB.put("/index",i)
-
-# tictacDB.get "/users", (users_receive) ->
-# 	print users_receive
-
-
-tictacDB.get "/matrix", (matrix_receive) ->
-	for j in [0...matrix.length]
-		if matrix_receive[j] == "0"
-			buttons[j].html = circle
-		else if matrix_receive[j] == "1"
-			buttons[j].html = cross
-
-# tictacDB.get "/matrix", (matrix) ->
-# 	for j in [0...matrix.length]
-# 		if matrix[j] == "0"
-# 			buttons[j].html = circle
-# 		else if matrix[j] == "1"
-# 			buttons[j].html = cross
-
-tictacDB.get "/index", (k) ->
 	for layer in buttons
 		layer.onClick ->
-			actual_layer = this.html
-			actual_layer_id = this.id-3
-			if actual_layer == """ """
-				if (k % 2) == 0
-					matrix[actual_layer_id] = "1"
-					tictacDB.put("/matrix",matrix)
-					k++
-				else
-					matrix[actual_layer_id] = "0"
-					tictacDB.put("/matrix",matrix)
-					k++
-				tictacDB.put("/index",k)
-				print matrix
-				print k
+			i++
+			if this.html == """ """
+				if (i % 2) == 0
+					matrix[this.name] = "1"
+					buttons[this.name].html = cross
+					if checkVictory("1",matrix) 
+						board.destroy()
+				else if (i % 2) == 1
+					matrix[this.name] = "0"
+					buttons[this.name].html = circle
+					print matrix
+					if checkVictory("0",matrix) 
+						board.destroy()
 
-tictacDB.onChange "/index", (k) ->
-	tictacDB.get "/matrix", (matrix_receive) ->
-		for j in [0...matrix.length]
-			if matrix_receive[j] == "0"
-				buttons[j].html = circle
-			else if matrix_receive[j] == "1"
-				buttons[j].html = cross
+checkVictory = (XO, matrix) ->
+	if (matrix[0] == XO && matrix[1] == XO && matrix[2] == XO)
+		return true
+	if (matrix[3] == XO && matrix[4] == XO && matrix[5] == XO)
+		return true
+	if (matrix[6] == XO && matrix[7] == XO && matrix[8] == XO)
+		return true
+	if (matrix[0] == XO && matrix[3] == XO && matrix[6] == XO)
+		return true
+	if (matrix[1] == XO && matrix[4] == XO && matrix[7] == XO)
+		return true
+	if (matrix[2] == XO && matrix[5] == XO && matrix[8] == XO)
+		return true
+	if (matrix[0] == XO && matrix[4] == XO && matrix[8] == XO)
+		return true
+	if (matrix[6] == XO && matrix[4] == XO && matrix[2] == XO)
+		return true
+
+startButton.onClick -> startNewGame()
