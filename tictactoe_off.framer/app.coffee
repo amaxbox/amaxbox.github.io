@@ -34,7 +34,7 @@ circle = """
 """
 if Utils.isDesktop()
 	scaleFactor = 1
-else 
+else
 	scaleFactor = 3
 
 bg = new BackgroundLayer
@@ -45,7 +45,7 @@ startButton = new Layer
 startNewGame = ->
 	buttons = []
 	i = 1
-	m=0
+	m = 0
 	matrix = []
 	board = new Layer
 		x: Align.center
@@ -76,13 +76,13 @@ startNewGame = ->
 				if (i % 2) == 0
 					matrix[this.name] = "1"
 					buttons[this.name].html = cross
-					if checkVictory("1",matrix) 
+					if checkVictory("1",matrix)
 						board.destroy()
 				else if (i % 2) == 1
 					matrix[this.name] = "0"
 					buttons[this.name].html = circle
 					print matrix
-					if checkVictory("0",matrix) 
+					if checkVictory("0",matrix)
 						board.destroy()
 
 checkVictory = (XO, matrix) ->

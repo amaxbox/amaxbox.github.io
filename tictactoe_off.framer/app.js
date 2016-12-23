@@ -1,4 +1,4 @@
-var bg, board, checkVictory, circle, cross, matrix, startNewGame, victory;
+var bg, checkVictory, circle, cross, scaleFactor, startButton, startNewGame;
 
 Framer.Info = {
   title: "",
@@ -11,61 +11,67 @@ cross = "<svg width=\"112px\" height=\"112px\" viewBox=\"151 190 112 112\" versi
 
 circle = "<svg width=\"112px\" height=\"112px\" viewBox=\"31 190 112 112\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"circle\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(31.000000, 190.000000)\">\n        <rect id=\"Rectangle\" fill=\"#FFF\" opacity=\"0\" x=\"0\" y=\"0\" width=\"112\" height=\"112\"></rect>\n        <path d=\"M56,106 C83.6142375,106 106,83.6142375 106,56 C106,28.3857625 83.6142375,6 56,6 C28.3857625,6 6,28.3857625 6,56 C6,83.6142375 28.3857625,106 56,106 Z M56,96 C78.09139,96 96,78.09139 96,56 C96,33.90861 78.09139,16 56,16 C33.90861,16 16,33.90861 16,56 C16,78.09139 33.90861,96 56,96 Z\" fill=\"#86BBD8\"></path>\n    </g>\n</svg>";
 
+if (Utils.isDesktop()) {
+  scaleFactor = 1;
+} else {
+  scaleFactor = 3;
+}
+
 bg = new BackgroundLayer({
   backgroundColor: "#2F4858"
 });
 
-matrix = [];
-
-board = new Layer({
-  x: Align.center,
-  y: Align.center,
-  rotationX: 45,
-  width: 114 * 3 - 2,
-  height: 114 * 3 - 2,
-  backgroundColor: "rgba(255,255,255,0.10)"
-});
+startButton = new Layer;
 
 startNewGame = function() {
-  var buttons, cell, i, indexX, indexY, j, k, l, layer, len, results;
+  var board, buttons, cell, i, indexX, indexY, j, k, l, layer, len, m, matrix, results;
   buttons = [];
-  i = 2;
+  i = 1;
+  m = 0;
   matrix = [];
-  print(matrix);
+  board = new Layer({
+    x: Align.center,
+    y: Align.center,
+    width: (114 * 3 - 2) * scaleFactor,
+    height: (114 * 3 - 2) * scaleFactor,
+    backgroundColor: "rgba(255,255,255,0.10)"
+  });
   for (indexY = j = 0; j <= 2; indexY = ++j) {
     for (indexX = k = 0; k <= 2; indexX = ++k) {
       cell = new Layer({
-        x: indexX * 114,
-        y: indexY * 114,
-        size: 112,
+        x: indexX * 114 * scaleFactor,
+        y: indexY * 114 * scaleFactor,
+        size: 112 * scaleFactor,
         backgroundColor: "#2F4858",
         opacity: 1,
         parent: board,
+        name: m,
         html: " "
       });
       buttons.push(cell);
       matrix.push(" ");
+      m++;
     }
   }
   results = [];
   for (l = 0, len = buttons.length; l < len; l++) {
     layer = buttons[l];
     results.push(layer.onClick(function() {
-      var actual_layer, actual_layer_id;
-      actual_layer = this.html;
-      actual_layer_id = this.id - 3;
-      if (actual_layer === " ") {
+      i++;
+      if (this.html === " ") {
         if ((i % 2) === 0) {
-          matrix[actual_layer_id] = "1";
-          buttons[actual_layer_id].html = cross;
-          checkVictory("1");
-          return i++;
-        } else {
-          matrix[actual_layer_id] = "0";
-          buttons[actual_layer_id].html = circle;
+          matrix[this.name] = "1";
+          buttons[this.name].html = cross;
+          if (checkVictory("1", matrix)) {
+            return board.destroy();
+          }
+        } else if ((i % 2) === 1) {
+          matrix[this.name] = "0";
+          buttons[this.name].html = circle;
           print(matrix);
-          checkVictory("0");
-          return i++;
+          if (checkVictory("0", matrix)) {
+            return board.destroy();
+          }
         }
       }
     }));
@@ -73,36 +79,33 @@ startNewGame = function() {
   return results;
 };
 
-startNewGame();
-
-victory = function() {
-  print("victory");
-  return startNewGame();
-};
-
-checkVictory = function(XO) {
+checkVictory = function(XO, matrix) {
   if (matrix[0] === XO && matrix[1] === XO && matrix[2] === XO) {
-    victory();
+    return true;
   }
   if (matrix[3] === XO && matrix[4] === XO && matrix[5] === XO) {
-    victory();
+    return true;
   }
   if (matrix[6] === XO && matrix[7] === XO && matrix[8] === XO) {
-    victory();
+    return true;
   }
   if (matrix[0] === XO && matrix[3] === XO && matrix[6] === XO) {
-    victory();
+    return true;
   }
   if (matrix[1] === XO && matrix[4] === XO && matrix[7] === XO) {
-    victory();
+    return true;
   }
   if (matrix[2] === XO && matrix[5] === XO && matrix[8] === XO) {
-    victory();
+    return true;
   }
   if (matrix[0] === XO && matrix[4] === XO && matrix[8] === XO) {
-    victory();
+    return true;
   }
   if (matrix[6] === XO && matrix[4] === XO && matrix[2] === XO) {
-    return victory();
+    return true;
   }
 };
+
+startButton.onClick(function() {
+  return startNewGame();
+});
