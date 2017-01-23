@@ -467,7 +467,7 @@ body {
 }
 
 a {
-  color: #2196F3;
+  color: #CF0027;
   text-decoration: none;
 }
 
@@ -505,7 +505,7 @@ strong {
 
 abbr[title] {
   cursor: help;
-  border-bottom: 1px dotted #2196F3;
+  border-bottom: 1px dotted #CF0027;
 }
 
 h1, h2, h3 {
@@ -568,7 +568,7 @@ h4, h5, h6 {
 }
 
 .mui-appbar {
-  background-color: #2196F3;
+  background-color: #CF0027;
   color: #FFF;
 }
 
@@ -735,31 +735,31 @@ h4, h5, h6 {
 
 .mui-btn--primary {
   color: #FFF;
-  background-color: #2196F3;
+  background-color: #CF0027;
 }
 
 .mui-btn--primary:hover, .mui-btn--primary:focus, .mui-btn--primary:active {
   color: #FFF;
-  background-color: #39a1f4;
+  background-color: #F62C52;
 }
 
 .mui-btn--primary[disabled]:hover, .mui-btn--primary[disabled]:focus, .mui-btn--primary[disabled]:active {
   color: #FFF;
-  background-color: #2196F3;
+  background-color: #CF0027;
 }
 
 .mui-btn--primary.mui-btn--flat {
-  color: #2196F3;
+  color: #CF0027;
   background-color: transparent;
 }
 
 .mui-btn--primary.mui-btn--flat:hover, .mui-btn--primary.mui-btn--flat:focus, .mui-btn--primary.mui-btn--flat:active {
-  color: #2196F3;
+  color: #CF0027;
   background-color: #f2f2f2;
 }
 
 .mui-btn--primary.mui-btn--flat[disabled]:hover, .mui-btn--primary.mui-btn--flat[disabled]:focus, .mui-btn--primary.mui-btn--flat[disabled]:active {
-  color: #2196F3;
+  color: #CF0027;
   background-color: transparent;
 }
 
@@ -1658,7 +1658,7 @@ h4, h5, h6 {
 .mui-select:focus > select {
   height: 33px;
   margin-bottom: -1px;
-  border-color: #2196F3;
+  border-color: #CF0027;
   border-width: 2px;
 }
 
@@ -1694,7 +1694,7 @@ h4, h5, h6 {
   outline: 0;
   height: 33px;
   margin-bottom: -1px;
-  border-color: #2196F3;
+  border-color: #CF0027;
   border-width: 2px;
 }
 
@@ -1731,7 +1731,7 @@ h4, h5, h6 {
 
 .mui-select:focus > label,
 .mui-select > select:focus ~ label {
-  color: #2196F3;
+  color: #CF0027;
 }
 
 .mui-select__menu {
@@ -1865,11 +1865,11 @@ h4, h5, h6 {
 }
 
 .mui-tabs__bar > li.mui--is-active {
-  border-bottom: 2px solid #2196F3;
+  border-bottom: 2px solid #CF0027;
 }
 
 .mui-tabs__bar > li.mui--is-active > a {
-  color: #2196F3;
+  color: #CF0027;
 }
 
 .mui-tabs__bar.mui-tabs__bar--justified {
@@ -1926,7 +1926,7 @@ h4, h5, h6 {
 
 .mui-textfield > input:focus ~ label,
 .mui-textfield > textarea:focus ~ label {
-  color: #2196F3;
+  color: #CF0027;
 }
 
 .mui-textfield--float-label > label {
@@ -1993,7 +1993,7 @@ h4, h5, h6 {
 
 .mui-textfield > input:focus,
 .mui-textfield > textarea:focus {
-  border-color: #2196F3;
+  border-color: #CF0027;
   border-width: 2px;
 }
 
@@ -2222,7 +2222,7 @@ h4, h5, h6 {
 }
 
 .mui--bg-primary {
-  background-color: #2196F3;
+  background-color: #CF0027;
 }
 
 .mui--bg-primary-dark {
