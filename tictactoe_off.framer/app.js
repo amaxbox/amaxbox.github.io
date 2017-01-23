@@ -62,6 +62,7 @@ startNewGame = function() {
         if ((i % 2) === 0) {
           matrix[this.name] = "1";
           buttons[this.name].html = cross;
+          print(matrix);
           if (checkVictory("1", matrix)) {
             return board.destroy();
           }
