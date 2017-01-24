@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- load MUI -->
     <link href="css/mui.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <script src="js/mui.js"></script>
   </head>
-  <body style="background-color: rgba(0,0,0,0.2); padding-top: 40px;">
+  <body>
     <!-- example content -->
 
-    <div class="mui-container">
-      <div class="mui--z5">
+    <button style="position: absolute;right: 12px;bottom:   12px;"class="mui-btn mui-btn--fab mui-btn--primary" onclick="showHide('block_id')"><i class="zmdi zmdi-plus zmdi-hc-3x" style="padding-top:6px"></i></button>
+    <div id="block_id" style="display: none;padding-top:10%;"class="mui-container">
+      <div class="mui--z20">
         <div class="mui-panel">
           <form class="mui-form">
             <legend>New Video</legend>
@@ -60,6 +62,24 @@
         </div>
       </div>
     </div>
-
+    <script type="text/javascript">
+      function showHide(element_id) {
+        if (document.getElementById(element_id)) {
+            //Записываем ссылку на элемент в переменную obj
+            var obj = document.getElementById(element_id);
+            //Если css-свойство display не block, то:
+            if (obj.style.display != "block") {
+                obj.style.display = "block"; //Показываем элемент
+                mui.overlay('on', obj);
+            }
+            else {
+              obj.style.display = "none"; //Скрываем элемент
+              // mui.overlay('off', obj);
+            }
+        }
+        //Если элемент с id-шником element_id не найден, то выводим сообщение
+        else alert("Элемент с id: " + element_id + " не найден!");
+      }
+    </script>
   </body>
 </html>
