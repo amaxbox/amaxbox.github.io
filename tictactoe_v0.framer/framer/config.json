@@ -1,19 +1,19 @@
 {
-  "orientation" : 0,
-  "updateDelay" : 0.3,
-  "contentScale" : 1,
-  "sharedPrototype" : 0,
   "propertyPanelToggleStates" : {
 
   },
-  "deviceType" : "fullscreen",
-  "projectId" : "D49AFAAC-CA21-4EA8-BB08-874F137DBAED",
   "deviceOrientation" : 0,
+  "sharedPrototype" : 0,
+  "contentScale" : 1,
+  "deviceType" : "fullscreen",
   "selectedHand" : "",
+  "updateDelay" : 0.3,
+  "deviceScale" : 1,
   "foldedCodeRanges" : [
     "{0, 190}",
     "{225, 1762}",
     "{2770, 642}"
   ],
-  "deviceScale" : 1
+  "orientation" : 0,
+  "projectId" : "D49AFAAC-CA21-4EA8-BB08-874F137DBAED"
 }

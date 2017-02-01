@@ -124,4 +124,6 @@ for button in board
 			if checkVictory("O",gameMatrix) == true
 				print "O - WIN"
 				reDraw(board)
-
+			if turn == 9
+				print "It's a draw"
+				reDraw(board)
