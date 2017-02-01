@@ -2,16 +2,16 @@
 # This info is presented in a widget when you share.
 # http://framerjs.com/docs/#info.info
 
+
 Framer.Info =
 	title: ""
 	author: "Андрей Максимов"
 	twitter: ""
 	description: ""
-
-
-
+{dpr} = require 'DevicePixelRatio'
+# SVG
 cross = """
-<svg width="112px" height="112px" viewBox="151 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="dpr 112" height="dpr 112" viewBox="151 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
     <defs></defs>
@@ -22,7 +22,7 @@ cross = """
 </svg>"""
 
 circle = """
-<svg width="112px" height="112px" viewBox="31 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="dpr 112" height="dpr 112" viewBox="31 190 112 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
     <defs></defs>
@@ -32,59 +32,41 @@ circle = """
     </g>
 </svg>
 """
-if Utils.isDesktop()
-	scaleFactor = 1
-else
-	scaleFactor = 3
 
 bg = new BackgroundLayer
-    backgroundColor: "#2F4858"
-startButton = new Layer
+	backgroundColor: "#2F4858"
 
-
-startNewGame = ->
-	buttons = []
-	i = 1
-	m = 0
-	matrix = []
+drawBoard = (numCell, sizeCell, gameMatrix) ->
+	boardArray = []
 	board = new Layer
-		x: Align.center
-		y: Align.center
-		width: (114*3-2)*scaleFactor
-		height: (114*3-2)*scaleFactor
+		size: dpr numCell*sizeCell+2*sizeCell/20
 		backgroundColor: "rgba(255,255,255,0.10)"
+	board.center()
+	for i in [0..numCell-1] then for j in [0..numCell-1]
+		boardCell = new Layer
+			width: dpr sizeCell
+			height: dpr sizeCell
+			x: dpr (sizeCell+sizeCell/20)*(j)
+			y: dpr (sizeCell+sizeCell/20)*(i)
+			parent: board
+			backgroundColor: "#2F4858"
 
-	for indexY in [0..2]
-		for indexX in [0..2]
-			cell = new Layer
-				x: indexX*114*scaleFactor
-				y: indexY*114*scaleFactor
-				size: 112*scaleFactor
-				backgroundColor: "#2F4858"
-				opacity: 1
-				parent: board
-				name: m
-				html: """ """
-			buttons.push(cell)
-			matrix.push(" ")
-			m++
+		boardArray.push(boardCell)
+		gameMatrix.push("")
+	return boardArray
 
-	for layer in buttons
-		layer.onClick ->
-			i++
-			if this.html == """ """
-				if (i % 2) == 0
-					matrix[this.name] = "1"
-					buttons[this.name].html = cross
-					print matrix
-					if checkVictory("1",matrix)
-						board.destroy()
-				else if (i % 2) == 1
-					matrix[this.name] = "0"
-					buttons[this.name].html = circle
-					print matrix
-					if checkVictory("0",matrix)
-						board.destroy()
+drawX = (boardCell) ->
+	boardCell.html = cross
+
+drawO = (boardCell) ->
+	boardCell.html = circle
+
+drawMatrix = (board, matrix)->
+	for sign, i in matrix
+		if sign == "0"
+			drawO(board[i])
+		if sign == "1"
+			drawX(board[i])
 
 checkVictory = (XO, matrix) ->
 	if (matrix[0] == XO && matrix[1] == XO && matrix[2] == XO)
@@ -103,5 +85,43 @@ checkVictory = (XO, matrix) ->
 		return true
 	if (matrix[6] == XO && matrix[4] == XO && matrix[2] == XO)
 		return true
+	else return false
+	
+gameMatrix = []
+turn = 0
+board = drawBoard(3, 100, gameMatrix)
 
-startButton.onClick -> startNewGame()
+
+
+newGameStart = ()->
+	board.destroy()
+	print "done"
+	gameMatrix = []
+	turn = 0
+	board = drawBoard(3, 100, gameMatrix)
+
+
+reDraw = (board) ->
+	for layer,i in board
+		layer.html=""
+		gameMatrix[i]=""
+		turn = 0
+
+
+for button in board
+	button.onClick ->
+		if gameMatrix[board.indexOf this] == ""
+			turn++
+			if (turn % 2) == 1
+				drawX(this)
+				gameMatrix[board.indexOf this] = "X"
+			if (turn % 2) == 0
+				drawO(this)	
+				gameMatrix[board.indexOf this] = "O"
+			if checkVictory("X",gameMatrix) == true
+				print "X - WIN"
+				reDraw(board)
+			if checkVictory("O",gameMatrix) == true
+				print "O - WIN"
+				reDraw(board)
+
