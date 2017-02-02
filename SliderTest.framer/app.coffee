@@ -8,6 +8,19 @@ p2y = 0
 layerA = new Layer
 	y: Align.top(40)
 	x: Align.center(-90)
+	width: 150
+	height: 150
+	backgroundColor: "#AAEEFF"
+	borderRadius: 10
+	
+layerB = new Layer
+	y: Align.top(40)
+	x: Align.center(90)
+	width: 150
+	height: 150
+	backgroundColor: "#00AAFF"
+	borderRadius: 75
+
 
 sliderTime = new SliderComponent
 	x: Align.center
@@ -54,7 +67,6 @@ for slider in bezSliders
 					time: timeX
 			third:
 				x: Align.center(90)
-
 				options:
 					curve: 'bezier-curve'
 					curveOptions: [p1x, p1y, p2x, p2y]
