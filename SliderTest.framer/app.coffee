@@ -8,21 +8,10 @@ sliderTime = new SliderComponent
 	x: Align.center
 	y: Align.center
 	min: 0
-	max: 10
+	max: 3
 	value: 0
 	knobSize: 40
 
-layerA.states = 
-	second:
-		x: Align.center(-90)
-		options:
-			curve: "ease"
-			time: timeX
-	third:
-		x: Align.center(90)
-		options:
-			curve: "ease"
-			time: timeX
 
 layerA.onTap ->
 	layerA.animate "third"
@@ -36,4 +25,14 @@ layerA.onStateSwitchEnd (q, state) ->
 sliderTime.onValueChange ->
 	timeX = sliderTime.value
 	print timeX
-	print layerA.states.second.options
+	layerA.states = 
+		second:
+			x: Align.center(-90)
+			options:
+				curve: "ease"
+				time: timeX
+		third:
+			x: Align.center(90)
+			options:
+				curve: "ease"
+				time: timeX
