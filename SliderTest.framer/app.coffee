@@ -138,9 +138,17 @@ grapBackLayer = new Layer
 graph = new Layer
 	backgroundColor: "rgba(0,169,255,0.0)"
 	parent: grapBackLayer
-
-
-
+f1x = p1x*200
+f1y = 200-p1y*200
+f2x = p2x*200
+f2y = 200-p2y*200
+path = """
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" fill="transparent"/>
+ 
+</svg>"""
+graph.html = path
+		
 for slider in bezSliders
 	slider.onValueChange ->
 		
@@ -159,7 +167,7 @@ for slider in bezSliders
 		
 		path = """
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" fill="transparent"/>
+  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" fill="transparent"/>
  
 </svg>"""
 		graph.html = path
