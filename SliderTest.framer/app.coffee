@@ -63,7 +63,11 @@ for i in [0..4]
 		min: 0
 		max: 1
 		value: 1
+		backgroundColor: "rgba(123,123,123,0.2)"
 	sliderBezier.fill.backgroundColor = "#28affa"
+	sliderBezier.knob.shadowY = 2
+	sliderBezier.height = 3
+	sliderBezier.knobSize = 24
 	bezSliders.push(sliderBezier)
 	
 	sliderText = new Layer
@@ -73,15 +77,20 @@ for i in [0..4]
 		backgroundColor: "rgba(123,123,123,0.0)"
 		style: 
 			color: "rgba(123,123,123,0.8)"
+			fontSize: "16px"
 			
 	sliderLabel = new Layer
-		x: Align.center(-220)
+		x: Align.center(-200)
 		y: Align.center(200+i*45)
 		width: 50
 		height: 30
 		backgroundColor: "rgba(123,123,123,0.)"
 		style: 
 			color: "rgba(123,123,123,0.8)"
+			fontSize: "16px"
+			
+
+			
 		
 	sliderTexts.push(sliderText)
 	sliderLabels.push(sliderLabel)
@@ -115,18 +124,19 @@ layerB.onStateSwitchEnd (q, state) ->
 	else
 		layerB.animate "third"
 
-grapBack = """<svg width="201px" height="200px" viewBox="174 180 201 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+grapBack = """
+<svg width="201px" height="200px" viewBox="259 182 201 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(174.000000, 180.000000)" fill-opacity="0.2">
-        <rect id="Rectangle" fill="#00AAFF" x="1" y="0" width="200" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" x="100" y="0" width="1" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" transform="translate(100.500000, 100.500000) rotate(-270.000000) translate(-100.500000, -100.500000) " x="100" y="0.5" width="1" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" transform="translate(101.000000, 50.500000) rotate(-270.000000) translate(-101.000000, -50.500000) " x="100.5" y="-49.5" width="1" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" transform="translate(101.000000, 150.500000) rotate(-270.000000) translate(-101.000000, -150.500000) " x="100.5" y="50.5" width="1" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" transform="translate(50.500000, 100.000000) rotate(-360.000000) translate(-50.500000, -100.000000) " x="50" y="0" width="1" height="200"></rect>
-        <rect id="Rectangle" fill="#00AAFF" transform="translate(149.500000, 100.000000) rotate(-360.000000) translate(-149.500000, -100.000000) " x="149" y="0" width="1" height="200"></rect>
+    <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(259.000000, 182.000000)">
+        <rect id="Rectangle" fill-opacity="0.1" fill="#9B9B9B" x="1" y="0" width="200" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" x="100" y="0" width="1" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" transform="translate(100.500000, 100.500000) rotate(-270.000000) translate(-100.500000, -100.500000) " x="100" y="0.5" width="1" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" transform="translate(101.000000, 50.500000) rotate(-270.000000) translate(-101.000000, -50.500000) " x="100.5" y="-49.5" width="1" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" transform="translate(101.000000, 150.500000) rotate(-270.000000) translate(-101.000000, -150.500000) " x="100.5" y="50.5" width="1" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" transform="translate(50.500000, 100.000000) rotate(-360.000000) translate(-50.500000, -100.000000) " x="50" y="0" width="1" height="200"></rect>
+        <rect id="Rectangle" fill-opacity="0.05" fill="#000000" transform="translate(149.500000, 100.000000) rotate(-360.000000) translate(-149.500000, -100.000000) " x="149" y="0" width="1" height="200"></rect>
     </g>
 </svg>"""
 
@@ -144,7 +154,7 @@ f2x = p2x*200
 f2y = 200-p2y*200
 path = """
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" fill="transparent"/>
+  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="2" stroke-linecap="round" fill="transparent"/>
  
 </svg>"""
 graph.html = path
@@ -167,13 +177,14 @@ for slider in bezSliders
 		
 		path = """
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="5" stroke-linecap="round" fill="transparent"/>
+  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="2" stroke-linecap="round" fill="transparent"/>
  
 </svg>"""
 		graph.html = path
 		layerA.states = 
 			second:
 				x: Align.center(-90)
+
 				options:
 					curve: 'bezier-curve'
 					curveOptions: [p1x, p1y, p2x, p2y]
