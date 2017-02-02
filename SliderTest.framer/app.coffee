@@ -1,3 +1,4 @@
+# V A R I A B L E S  L A Y E R S  S T A T E S
 
 bezSliders = []
 sliderTexts = []
@@ -41,6 +42,7 @@ layerA.states =
 			curve: 'bezier-curve'
 			curveOptions: [p1x, p1y, p2x, p2y]
 			time: timeX
+
 layerB.states = 
 	second:
 		rotationY: 180
@@ -54,7 +56,7 @@ layerB.states =
 			curve: 'bezier-curve'
 			curveOptions: [p1x, p1y, p2x, p2y]
 			time: timeX
-
+# T E X T  L A B E L S
 
 for i in [0..4]
 	sliderBezier = new SliderComponent
@@ -64,11 +66,11 @@ for i in [0..4]
 		max: 1
 		value: 1
 		backgroundColor: "rgba(123,123,123,0.2)"
+	
 	sliderBezier.fill.backgroundColor = "#28affa"
 	sliderBezier.knob.shadowY = 2
 	sliderBezier.height = 3
 	sliderBezier.knobSize = 24
-	bezSliders.push(sliderBezier)
 	
 	sliderText = new Layer
 		x: Align.center(280)
@@ -89,40 +91,34 @@ for i in [0..4]
 			color: "rgba(123,123,123,0.8)"
 			fontSize: "16px"
 			
-
-			
-		
 	sliderTexts.push(sliderText)
 	sliderLabels.push(sliderLabel)
+	bezSliders.push(sliderBezier)
 
 sliderLabels[0].html = "Time"
 sliderLabels[1].html = "P1X"
 sliderLabels[2].html = "P1Y"
 sliderLabels[3].html = "P2X"
 sliderLabels[4].html = "P2Y"
-
-
 for layer in sliderTexts
 			layer.html = bezSliders[(sliderTexts.indexOf layer)].value.toFixed(2)
+# A N I M A T I O N S  C Y C L E S
 
-
-layerA.onTap ->
-	layerA.animate "third"
+layerB.animate "third"
+layerA.animate "third"
 	
 layerA.onStateSwitchEnd (q, state) ->
 	if state is "third"
 		layerA.animate "second"
 	else
 		layerA.animate "third"
-
-layerB.onTap ->
-	layerB.animate "third"
 	
 layerB.onStateSwitchEnd (q, state) ->
 	if state is "third"
 		layerB.animate "second"
 	else
 		layerB.animate "third"
+# D R A W  G R A P H 
 
 grapBack = """
 <svg width="201px" height="200px" viewBox="259 182 201 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -154,14 +150,13 @@ f2x = p2x*200
 f2y = 200-p2y*200
 path = """
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="2" stroke-linecap="round" fill="transparent"/>
- 
+  <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="2" stroke-linecap="round" fill="transparent"/> 
 </svg>"""
 graph.html = path
-		
+# M A I N  C Y C L E
+
 for slider in bezSliders
 	slider.onValueChange ->
-		
 		timeX = bezSliders[0].value.toFixed(2)
 		p1x = bezSliders[1].value.toFixed(2)
 		p1y = bezSliders[2].value.toFixed(2)
@@ -174,7 +169,6 @@ for slider in bezSliders
 		
 		for layer in sliderTexts
 			layer.html = bezSliders[(sliderTexts.indexOf layer)].value.toFixed(2)
-		
 		path = """
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
   <path d="M 0 200 C """+f1x+""" """+f1y+""" , """+f2x+""" """+f2y+""", 200 0" stroke="#00AAFF" stroke-width="2" stroke-linecap="round" fill="transparent"/>
@@ -184,7 +178,6 @@ for slider in bezSliders
 		layerA.states = 
 			second:
 				x: Align.center(-90)
-
 				options:
 					curve: 'bezier-curve'
 					curveOptions: [p1x, p1y, p2x, p2y]
@@ -210,7 +203,6 @@ for slider in bezSliders
 					time: timeX
 		layerB.animate "third"
 		layerA.animate "third"
-		
-layerB.animate "third"
-layerA.animate "third"
+
+
 
