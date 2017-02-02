@@ -1,19 +1,20 @@
 {
+  "orientation" : 0,
+  "updateDelay" : 0.3,
+  "contentScale" : 1,
+  "fullScreen" : false,
+  "sharedPrototype" : 0,
   "propertyPanelToggleStates" : {
 
   },
+  "deviceType" : "apple-iphone-5c-white",
+  "projectId" : "D49AFAAC-CA21-4EA8-BB08-874F137DBAED",
   "deviceOrientation" : 0,
-  "sharedPrototype" : 0,
-  "contentScale" : 1,
-  "deviceType" : "fullscreen",
   "selectedHand" : "",
-  "updateDelay" : 0.3,
-  "deviceScale" : 1,
   "foldedCodeRanges" : [
     "{0, 190}",
-    "{225, 1762}",
-    "{2770, 642}"
+    "{229, 1762}",
+    "{3546, 642}"
   ],
-  "orientation" : 0,
-  "projectId" : "D49AFAAC-CA21-4EA8-BB08-874F137DBAED"
+  "deviceScale" : "fit"
 }
