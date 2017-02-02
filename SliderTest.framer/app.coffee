@@ -1,4 +1,9 @@
-timeX = 1
+
+bezSliders = []
+p1x = 0
+p1y = 0
+p2x = 0
+p2y = 0
 
 layerA = new Layer
 	y: Align.top(40)
@@ -11,7 +16,16 @@ sliderTime = new SliderComponent
 	max: 3
 	value: 0
 	knobSize: 40
+bezSliders.push(sliderTime)
 
+for i in [1..4]
+	sliderBezier = new SliderComponent
+		x: Align.center
+		y: Align.center(60+i*45)
+		min: -2
+		max: 2
+		value: 0
+	bezSliders.push(sliderBezier)
 
 layerA.onTap ->
 	layerA.animate "third"
@@ -22,17 +36,26 @@ layerA.onStateSwitchEnd (q, state) ->
 	else
 		layerA.animate "third"
 
-sliderTime.onValueChange ->
-	timeX = sliderTime.value
-	print timeX
-	layerA.states = 
-		second:
-			x: Align.center(-90)
-			options:
-				curve: "ease"
-				time: timeX
-		third:
-			x: Align.center(90)
-			options:
-				curve: "ease"
-				time: timeX
+for slider in bezSliders
+	slider.onValueChange ->
+		timeX = bezSliders[0].value
+		p1x = bezSliders[1].value
+		p1y = bezSliders[2].value
+		p2x = bezSliders[3].value
+		p2y = bezSliders[4].value
+		print timeX, p1x, p1y, p2x, p2y
+		
+		layerA.states = 
+			second:
+				x: Align.center(-90)
+				options:
+					curve: 'bezier-curve'
+					curveOptions: [p1x, p1y, p2x, p2y]
+					time: timeX
+			third:
+				x: Align.center(90)
+
+				options:
+					curve: 'bezier-curve'
+					curveOptions: [p1x, p1y, p2x, p2y]
+					time: timeX
