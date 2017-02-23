@@ -84,7 +84,7 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 # 		opacity: 0
 		blur: 14*scaleFactor
 
-		
+
 	photoLayer = new Layer
 		parent: Card
 		width: Card.width
@@ -102,12 +102,12 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 
 	textBackground.style =
 		"border-radius": "0 0 12px 12px"
-	textBackground.style.background = "-webkit-linear-gradient(top, rgba(0,0,0,0) 20%,rgba(0,0,0,0.8) 100%)"	
+	textBackground.style.background = "-webkit-linear-gradient(top, rgba(0,0,0,0) 20%,rgba(0,0,0,0.8) 100%)"
 
 	Card.draggable.enabled = true
 	Card.draggable.momentum = false
 	Card.draggable.speedY = 0
-	
+
 	userName = new Layer
 		parent: Card
 		backgroundColor: "rgba(0,0,0,0)"
@@ -144,7 +144,7 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 # 			x: screenMidX * 3
 # 			options:
 # 				curve: "spring(700,80,0)"
-# 		
+#
 # 		Utils.delay 0.1, ->
 # 			for index in [i..NumberCards]
 # 				Stack[index].animate
@@ -154,10 +154,10 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 # 					blur: ((index-1) * blurOffset)+(i * -blurOffset)
 # 					options:
 # 						curve: "spring(700,80,0)"
-# 						
+#
 	sketch.Buttons.bringToFront()
 	Stack[i].on Events.DragEnd, ->
-		
+
 		Stack[i].children[0].animate
 			opacity: 1
 			options:
@@ -167,12 +167,12 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 			options:
 				curve: "spring(700,80,0)"
 
-		if Stack[i].midX < (Screen.width - Screen.width * 0.75) 
+		if Stack[i].midX < (Screen.width - Screen.width * 0.75)
 			Stack[i].animate
 				x: -screenMidX * 3
 				options:
 					curve: "spring(700,80,0)"
-			
+
 			Utils.delay 0.1, ->
 				for index in [i..NumberCards]
 					Stack[index].animate
@@ -188,10 +188,10 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 				rotationZ: 0
 				options:
 					curve: "spring(800,80,0)"
-			
-	# Add some light rotation behavior		
+
+	# Add some light rotation behavior
 	Stack[i].on Events.TouchStart, (event) ->
-		startX = event.x 
+		startX = event.x
 		Stack[i].children[0].animate
 			opacity: 0
 			options:
@@ -200,17 +200,17 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 			scale: 1.05
 			options:
 				curve: "spring(700,80,0)"
-				
+
 		Stack[i].on Events.DragMove, (e) ->
 			delta = e.x - startX
 			Stack[i].rotationZ = Utils.modulate(delta, [-screenMidX,screenMidX], [-10,10], true)
-						
+
 # Card.on Events.Click, ->
 # 	Card.animate
 # 		scale: 1.00
 # 		options:
 # 			curve: "spring(380, 25, 3)"
-# 	
+#
 # 	shadowLayer.animate
 # 		opacity: 1.00
 # 		options:
@@ -222,7 +222,7 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 # 	Card.children[1].image = data[i].avatar_url
 # 	Card.children[3].html = data[i].firstname + ", " + Utils.round(Utils.randomNumber(18, 36))
 # 	Card.children[4].html = data[i].city + ", " + Utils.round(Utils.randomNumber(500, 1000))+"м"
-# 
+#
 # shake.onShake = () ->
 # 	childrenLayers = Card.children
 # 	i = Utils.randomChoice([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19])
@@ -230,4 +230,3 @@ data = JSON.parse Utils.domLoadDataSync "data.JSON"
 # 	Card.children[1].image = data[i].avatar_url
 # 	Card.children[3].html = data[i].firstname + ", " + Utils.round(Utils.randomNumber(18, 36))
 # 	Card.children[4].html = data[i].city + ", " + Utils.round(Utils.randomNumber(500, 1000))+"м"
-

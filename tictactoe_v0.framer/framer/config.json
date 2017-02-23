@@ -5,16 +5,22 @@
   "fullScreen" : false,
   "sharedPrototype" : 0,
   "propertyPanelToggleStates" : {
-
+    "Filters" : false
   },
-  "deviceType" : "apple-iphone-5c-white",
+  "deviceType" : "apple-iphone-7-silver",
   "projectId" : "D49AFAAC-CA21-4EA8-BB08-874F137DBAED",
   "deviceOrientation" : 0,
   "selectedHand" : "",
   "foldedCodeRanges" : [
     "{0, 190}",
-    "{229, 1762}",
-    "{3546, 642}"
+    "{194, 89}",
+    "{284, 10473}",
+    "{11706, 594}",
+    "{12301, 2286}",
+    "{14588, 560}",
+    "{15149, 210}",
+    "{15360, 716}",
+    "{16077, 881}"
   ],
   "deviceScale" : "fit"
 }
