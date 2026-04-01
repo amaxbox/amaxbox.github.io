@@ -71,18 +71,17 @@ body {
 .tb-right { display: flex; align-items: center; gap: 10px; }
 
 .btn {
-  display: inline-flex; align-items: center;
-  font-family: var(--font); font-size: 11px; line-height: 12px;
-  letter-spacing: .06em; text-transform: uppercase;
-  border: none; cursor: pointer; border-radius: 4px;
-  padding: 8px 14px;
-  transition: opacity .15s, transform .1s, background .15s;
-  background: var(--primary-3); color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font); font-size: 16px; line-height: 1;
+  border: none; cursor: pointer; border-radius: 50%;
+  width: 32px; height: 32px; padding: 0;
+  transition: background .15s, color .15s, opacity .15s;
+  background: transparent; color: var(--text-muted);
 }
-.btn:hover { opacity: .82; }
-.btn:active { transform: scale(.97); }
-.btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
-.btn.primary { background: var(--primary); color: #fff; }
+.btn:hover { background: var(--n2); color: var(--text); }
+.btn:active { opacity: .6; }
+.btn:disabled { opacity: .25; cursor: not-allowed; }
+.btn.primary { background: transparent; color: var(--text-muted); }
 
 .toggle-track {
   width: 40px; height: 22px; border-radius: 11px;
@@ -301,8 +300,8 @@ td.will { color: var(--primary-2); }
     <span class="counter" id="counter">1 / 9</span>
   </div>
   <div class="tb-right">
-    <button class="btn" id="btn-prev" onclick="go(-1)" disabled>← Назад</button>
-    <button class="btn primary" id="btn-next" onclick="go(1)">Далее →</button>
+    <button class="btn" id="btn-prev" onclick="go(-1)" disabled>←</button>
+    <button class="btn primary" id="btn-next" onclick="go(1)">→</button>
     <div class="toggle-track" id="toggle" onclick="toggleTheme()">
       <div class="toggle-thumb"></div>
     </div>
@@ -566,7 +565,6 @@ td.will { color: var(--primary-2); }
     document.getElementById('btn-prev').disabled = cur === 1;
     const btnNext = document.getElementById('btn-next');
     btnNext.disabled = cur === total;
-    btnNext.textContent = cur === total ? 'Готово' : 'Далее →';
   }
 
   function toggleTheme() {
